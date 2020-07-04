@@ -1,0 +1,51 @@
+Basics:
+1. Search time in array is O(n).
+2. Search time in tree is O(log n).
+3. Ideally, Search time in array based hash table is constant O(1) in the average case.
+4. Array-based, tree-based and linked-list based hash tables are used.
+
+
+Applications :
+1. Hashing is the techniques used to implement an ADT(Abstract Data Type) dictionary.
+2. Compiler uses dictionary to keep track of declared variables in source code. The data stucture is called Symbol Table.
+3. Spelling Checker, entire dictionary can be prehashed and words can be checked in constant time.
+
+$$ To achieve constant time performance objective, the implementation must be based on some way on an array rather than a linked list.
+This is because, we can access the k-th element of an array in constant time, whereas the same operation in a linked list takes longer time.
+
+$$ We are designing a container which will be used to hold some number of items of a given set K. We call the elements of the set K keys and K 
+is called the key space.
+The general approach is to store the keys in an array. The position (also called location or index) i of a key k in the array is given by function
+f(k), called a Hash function, which determines the position of a given key directly from that key (i.e., i = f(k) is called the hash code of k).
+
+$$ In general case, we expect the size of the set of keys, denoted as |K|, to be relatively large in comparison with the number of items stored
+in the container M.(M << |K|).
+In other words, the number of items stored in the container is significantly less than |K|. We use an array of size M to contain items.
+
+Consequently we need a function 
+            f: K -> {0, 1, ..., M - 1}
+
+This function maps(or transforms) the set of key values to be stored in the container to subscripts (indexes) in an array of length M.
+This function is called as Hash Function. 
+
+In general, since |K|>>M, the mapping defined by a hash function will be many-to-one mapping.
+That is, there will exist many pairs of distinct keys x and y, such that x!=y for which f(x) = f(y).
+This situation is called collision, and f is not a perfect hash function.
+
+
+The Characteristics of a good hash function:
+1. It avoid collisions.
+2. It tends to spread keys evenly in the array.
+3. It is easy to compute(i.e., computational time complexity of a hash function should be O(1)).
+
+
+Collision Resolution Methods.
+1. Linear Probing Method.
+2. Quadratic Probing Method.
+3. Double Hashing Method.
+4. Coalesced Chaining Method.
+5. Separate Direct/Chaining Method.
+
+Three Methods in open addressing are linear Probing, Quadratic Probing and Double hashing.
+These Methods are of the division hashing method because the hash function is f(k) = k % M.
+Some other hashing methods are middle-square hashing method, Fibonacci hashing method and multiplication hashing method and so on.
