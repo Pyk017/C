@@ -1,68 +1,59 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Node{
+class BST{
+    int data;
+    BST *left, *right;
+
     public:
-        int key;
-        Node* left, *right;
-        Node(int x){
-            key = x;
-            left = right = NULL;
-        }
+        BST();
+        BST(int);
+        BST* insert(BST*, int);
+        void inorder(BST*);
 };
 
-void insert(Node* temp, int data){
-    if(temp == NULL){
-        cout << temp->key << endl;
-        temp = new Node(data);
-        return;
-    }
-        
-    queue<Node*> q;
-    q.push(temp);
-
-    while(!q.empty()){
-        Node* temp = q.front();
-        q.pop();
-
-        if(!temp->left){
-            temp->left = new Node(data);
-            break;
-        }
-        else{
-            q.push(temp->left);
-        }
-
-        if(!temp->right){
-            temp->right = new Node(data);
-            break;
-        }
-        else{
-            q.push(temp->right);
-        }
-    }
+BST :: BST(){
+    data = 0;
+    left = NULL;
+    right = NULL;
 }
 
+BST :: BST(int value){
+    data = value;
+    left = right = NULL;
+}
 
-void display(Node* root){
-    if(!root)
-        return
-    display(root->left);
-    cout << root->key << " ";
-    display(root->right);
+BST* BST:: insert(BST* root, int value){
+    if(!root){
+        return new BST(value);
+    }
+    if(value > root->data){
+        root->right = insert(root->right, value);
+    }
+    else{
+        root->left = insert(root->left, value);
+    }
+    return root;
+}
+
+void BST:: inorder(BST* root){
+    if(root != NULL){
+        inorder(root->left);
+        cout << root->data << " ";
+        inorder(root->right);
+    }
 }
 
 int main(){
+    BST tree, *root=NULL;
     int n;
     cin >> n;
-    Node* root = NULL;
-    int data;
+    int temp;
     for(int i=0; i<n; i++){
-        cin >> data;
-        insert(root, data);
-        cout << root->key << endl;
+        cin >> temp;
+        root = tree.insert(root, temp);
     }
-    display(root);
+    cout << "Binary Tree Created!" << endl;
+    tree.inorder(root);
     return 0;
 }
-
